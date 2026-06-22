@@ -1,0 +1,33 @@
+# MarketPulse
+
+> Multi-market expansion and monetization strategy case study for Ai Palette (an AI-powered consumer-insights platform based in Singapore). Defines what to standardize vs. localize, how to tier and price features per market, and which go-to-market motion to use — backed by an MDP-based market-sequencing model, SHAP-style score explainability, and a bottoms-up ARR model (~$9.2M Year 3 / $28M Year 5). All figures are estimates anchored to public benchmarks; Ai Palette is privately held with no public financials.
+
+## Core documents
+
+- [README.md](README.md): Project overview, headline recommendations, and FAQ.
+- [DELIVERABLES.md](DELIVERABLES.md): Master index of every deliverable mapped to the brief.
+- [docs/01-context-and-problem.md](docs/01-context-and-problem.md): Business context and the expansion blind spot.
+- [docs/02-assumptions-and-data-sources.md](docs/02-assumptions-and-data-sources.md): Every estimate's source and method — the audit trail.
+- [docs/03-phase1-localization-matrix.md](docs/03-phase1-localization-matrix.md): What stays global vs. what gets localized.
+- [docs/04-phase1-feature-tiering.md](docs/04-phase1-feature-tiering.md): Essentials / Growth / Enterprise tier logic.
+- [docs/05-phase2-pricing-packaging.md](docs/05-phase2-pricing-packaging.md): Pricing model, packaging, willingness-to-pay.
+- [docs/06-phase2-gtm-onboarding.md](docs/06-phase2-gtm-onboarding.md): PLG vs. sales-led motion and onboarding.
+- [docs/07-market-sequencing.md](docs/07-market-sequencing.md): Scored market prioritization and 3-wave entry plan.
+- [docs/08-competitive-benchmark.md](docs/08-competitive-benchmark.md): Competitor benchmark and positioning.
+- [docs/09-strategy-memo.md](docs/09-strategy-memo.md): Consulting strategy memo (SCQA, Pyramid Principle).
+- [docs/10-arr-model-methodology.md](docs/10-arr-model-methodology.md): Bottoms-up ARR model methodology and sensitivity.
+- [docs/11-decision-science.md](docs/11-decision-science.md): MDP entry-sequencing and SHAP-style score explainability.
+- [docs/12-valueforge-prd.md](docs/12-valueforge-prd.md): ValueForge product requirements and user flow.
+- [workflow/market-entry-automation.md](workflow/market-entry-automation.md): Automated market-entry decision engine (rubric and flow).
+
+## Interactive tools
+
+- [dashboard/index.html](dashboard/index.html): Interactive solution dashboard (Chart.js).
+- [wireframe/index.html](wireframe/index.html): Clickable brand-manager product wireframe.
+- [arr-model/](arr-model/): Streamlit ARR model app with tornado sensitivity and live MDP slider.
+- [decision-science/](decision-science/): Python MDP solver and SHAP-style explainer.
+
+## Optional
+
+- [frameworks/](frameworks/): Machine-readable CSVs (localization, tiering, pricing, market scoring, competitor benchmark).
+- [deliverables/](deliverables/): Graded outputs — executive deck, commercial architecture workbook, strategy memo, ARR model, ValueForge deck, judge's cheat sheet.
