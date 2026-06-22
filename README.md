@@ -4,6 +4,8 @@
 
 ### Ai Palette — Multi-Market Expansion & Monetization Strategy
 
+<img src="assets/deck-cover-01.png" width="720" alt="MarketPulse — cover slide"/>
+
 *Moving a monolithic AI-insights platform to a **tiered, localizable, repeatably-priced** product — built to scale across global markets without exploding operational complexity.*
 
 ![Focus](https://img.shields.io/badge/focus-Product%20%26%20Commercial%20Strategy-1F3864)
@@ -12,9 +14,48 @@
 ![Decision Science](https://img.shields.io/badge/decision%20science-MDP%20%2B%20SHAP-385723)
 ![Figures](https://img.shields.io/badge/figures-illustrative%20%C2%B7%20benchmark--anchored-C8860D)
 
-**[📊 Deliverables](DELIVERABLES.md) · [🎞 Executive Deck](deliverables/DeliverableA_Executive_Presentation.pptx) · [🧮 Commercial Architecture](deliverables/DeliverableB_Commercial_Architecture.xlsx) · [📈 ARR Model](arr-model/) · [🧠 Decision Science](decision-science/) · [🖥 Dashboard](dashboard/index.html)**
+### 🔗 Open it live — no download needed
+
+[![Executive Deck](https://img.shields.io/badge/🎞_View_Deck-Executive_Presentation-1F3864?style=for-the-badge)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fnightraven4545%2FMarketPulse%2Fmain%2Fdeliverables%2FDeliverableA_Executive_Presentation.pptx)
+[![Strategy PDF](https://img.shields.io/badge/📄_Open_PDF-Executive_Presentation-2E5496?style=for-the-badge)](deliverables/DeliverableA_Executive_Presentation.pdf)
+[![Live Dashboard](https://img.shields.io/badge/🖥_Live_Demo-Interactive_Dashboard-2F9E8F?style=for-the-badge)](https://raw.githack.com/nightraven4545/MarketPulse/main/dashboard/index.html)
+[![Live Wireframe](https://img.shields.io/badge/🖱_Live_Demo-ValueForge_Wireframe-2F9E8F?style=for-the-badge)](https://raw.githack.com/nightraven4545/MarketPulse/main/wireframe/index.html)
+
+[![ValueForge Deck](https://img.shields.io/badge/🎞_View_Deck-ValueForge_Strategy-1F3864?style=flat-square)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fnightraven4545%2FMarketPulse%2Fmain%2Fdeliverables%2FDeliverableA_ValueForge_Product_Strategy_Deck.pptx)
+[![Strategy Memo](https://img.shields.io/badge/📝_Read_Memo-Consulting_Strategy-385723?style=flat-square)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fnightraven4545%2FMarketPulse%2Fmain%2Fdeliverables%2FMarketPulse_Strategy_Memo.docx)
+[![Commercial Architecture](https://img.shields.io/badge/🧮_Open_Workbook-Commercial_Architecture-385723?style=flat-square)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fnightraven4545%2FMarketPulse%2Fmain%2Fdeliverables%2FDeliverableB_Commercial_Architecture.xlsx)
+[![Cheat Sheet](https://img.shields.io/badge/⚡_One_Pager-Judges_Cheat_Sheet-C8860D?style=flat-square)](deliverables/MarketPulse_Judges_CheatSheet.pdf)
+
+**[📊 Full deliverables index](DELIVERABLES.md) · [📈 ARR Model](arr-model/) · [🧠 Decision Science](decision-science/)**
 
 </div>
+
+---
+
+## Visual preview
+
+<table>
+<tr>
+<td width="33%"><img src="assets/tam_funnel.png" width="280"/><br/><sub><a href="docs/07-market-sequencing.md">TAM → SAM → SOM funnel</a></sub></td>
+<td width="33%"><img src="assets/competitor_2x2.png" width="280"/><br/><sub><a href="docs/08-competitive-benchmark.md">Competitive positioning 2×2</a></sub></td>
+<td width="33%"><img src="assets/localization_donut.png" width="280"/><br/><sub><a href="docs/03-phase1-localization-matrix.md">Standardize vs. localize split</a></sub></td>
+</tr>
+<tr>
+<td width="33%"><img src="assets/market_scores.png" width="280"/><br/><sub><a href="docs/07-market-sequencing.md">Market sequencing — weighted scores</a></sub></td>
+<td width="33%"><img src="assets/pricing_tiers.png" width="280"/><br/><sub><a href="docs/05-phase2-pricing-packaging.md">Three-tier pricing structure</a></sub></td>
+<td width="33%"><img src="assets/regional_wtp.png" width="280"/><br/><sub><a href="docs/05-phase2-pricing-packaging.md">Regional willingness-to-pay</a></sub></td>
+</tr>
+<tr>
+<td width="33%"><img src="assets/gtm_acv.png" width="280"/><br/><sub><a href="docs/06-phase2-gtm-onboarding.md">GTM motion vs. deal size (ACV)</a></sub></td>
+<td width="33%"><img src="assets/arr_build.png" width="280"/><br/><sub><a href="docs/10-arr-model-methodology.md">Bottoms-up ARR build, Y1–Y5</a></sub></td>
+<td width="33%"><img src="assets/tornado.png" width="280"/><br/><sub><a href="docs/10-arr-model-methodology.md">ARR sensitivity (tornado)</a></sub></td>
+</tr>
+<tr>
+<td width="33%"><img src="assets/mdp_sequence.png" width="280"/><br/><sub><a href="docs/11-decision-science.md">MDP-optimal entry sequence</a></sub></td>
+<td width="33%"><img src="assets/decision_plot.png" width="280"/><br/><sub><a href="docs/11-decision-science.md">SHAP-style score explainability</a></sub></td>
+<td width="33%" align="center"><sub>↳ all charts are <a href="assets/">native PNGs in <code>assets/</code></a>, embedded in the deck + dashboard, not screenshots</sub></td>
+</tr>
+</table>
 
 ---
 
@@ -73,8 +114,8 @@ Entering new markets with one undifferentiated product over-localizes everything
 | [`docs/11-decision-science.md`](docs/11-decision-science.md) | **MDP** entry-sequencing + **SHAP-style** score explainability (the rigorous core) |
 | [`workflow/market-entry-automation.md`](workflow/market-entry-automation.md) | The **automated market-entry decision engine** (rubric + flow) |
 | [`docs/12-valueforge-prd.md`](docs/12-valueforge-prd.md) | **ValueForge PRD** (Deliverable B) — product requirements + user flow |
-| [`dashboard/index.html`](dashboard/index.html) | **Interactive solution dashboard** — open in a browser (Chart.js visualizations) |
-| [`wireframe/index.html`](wireframe/index.html) | **ValueForge interactive wireframe** (Deliverable B) — clickable brand-manager flow |
+| [`dashboard/index.html`](dashboard/index.html) | **Interactive solution dashboard** — [open live ↗](https://raw.githack.com/nightraven4545/MarketPulse/main/dashboard/index.html) (Chart.js visualizations) |
+| [`wireframe/index.html`](wireframe/index.html) | **ValueForge interactive wireframe** (Deliverable B) — [open live ↗](https://raw.githack.com/nightraven4545/MarketPulse/main/wireframe/index.html), clickable brand-manager flow |
 | [`arr-model/`](arr-model/) | **Interactive ARR model** — Streamlit app (`streamlit run app.py`) with tornado + live MDP |
 | [`decision-science/`](decision-science/) | **MDP solver + SHAP-style explainer** (Python; generates the decision plot & policy chart) |
 | [`DELIVERABLES.md`](DELIVERABLES.md) | **Master index** of every deliverable mapped to the brief |
