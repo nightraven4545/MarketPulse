@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ValueForge — Interactive Wireframe (Brand Manager flow)</title>
+<style>
+:root{--navy:#1F3864;--blue:#2E5496;--acc:#2F9E8F;--green:#385723;--amber:#C8860D;--red:#C0392B;
+--ink:#1f2733;--mut:#6b7585;--line:#e3e8ef;--bg:#eef1f5;--card:#fff;--soft:#f6f8fb;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.app{max-width:1180px;margin:18px auto;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(20,40,80,.07)}
+.topbar{display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;padding:12px 20px}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.3px}
+.logo span{color:#7fd1c4}
+.topbar .ctx{margin-left:auto;font-size:12px;color:#bcd0e6}
+.note{background:#fff7e6;border-bottom:1px solid #f0e2bd;color:#7a5b00;font-size:12px;padding:6px 20px}
+/* flow strip */
+.flow{display:flex;gap:0;align-items:center;padding:14px 20px;background:var(--soft);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 10px;border-radius:8px}
+.step:hover{background:#eaf1fb}
+.step .n{width:24px;height:24px;border-radius:50%;background:#cdd6e3;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.step .t{font-size:12.5px;color:var(--mut);font-weight:600}
+.step.active .n{background:var(--acc)} .step.active .t{color:var(--navy)}
+.step.done .n{background:var(--blue)}
+.sep{flex:1;height:2px;background:#dde3ec;min-width:14px;margin:0 2px}
+.body{display:flex;min-height:520px}
+.side{width:190px;background:#fafbfd;border-right:1px solid var(--line);padding:14px 10px;font-size:13px}
+.side h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:8px 8px 6px}
+.nav{padding:8px 10px;border-radius:8px;color:var(--ink);cursor:pointer;margin-bottom:2px}
+.nav:hover{background:#eef3fb}.nav.active{background:var(--navy);color:#fff}
+.main{flex:1;padding:20px 24px}
+.screen{display:none} .screen.active{display:block}
+.h{font-size:19px;color:var(--navy);font-weight:800;margin-bottom:2px}
+.sub{font-size:13px;color:var(--mut);margin-bottom:16px}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}.side{display:none}}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fff}
+.card.soft{background:var(--soft)}
+label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px;font-weight:600}
+.inp{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:13px;background:#fff;color:var(--ink)}
+.chip{display:inline-block;background:#eaf1fb;color:var(--blue);border-radius:14px;padding:3px 10px;font-size:11px;font-weight:600;margin:2px 4px 2px 0}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-top:14px}
+.btn.alt{background:var(--navy)} .btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--blue)}
+.trend{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:8px}
+.trend .meta{font-size:12px;color:var(--mut)}
+.up{color:var(--green);font-weight:700;font-size:12px}.mom{color:var(--amber);font-weight:700;font-size:12px}
+.bar{height:8px;border-radius:5px;background:#e8edf4;overflow:hidden;margin-top:6px}
+.bar > i{display:block;height:100%;background:var(--acc)}
+/* 2x2 */
+.matrix{position:relative;height:300px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:6px}
+.matrix .ax{position:absolute;font-size:10px;color:var(--mut)}
+.quad{position:absolute;width:50%;height:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;opacity:.92}
+.quad small{font-weight:500}
+.dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 2px var(--navy)}
+.lbl{position:absolute;font-size:10px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--blue);color:#fff;text-align:left;padding:8px 10px}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:nth-child(even) td{background:var(--soft)}
+.score{font-weight:800;color:var(--navy)}
+.drv{display:flex;gap:3px;align-items:center}
+.drv i{height:9px;border-radius:2px;display:inline-block}
+.brief{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff}
+.brief h3{color:var(--navy);font-size:15px;margin:14px 0 6px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
+.kpi{flex:1;min-width:120px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:10px}
+.kpi .v{font-size:18px;font-weight:800;color:var(--navy)}.kpi .l{font-size:11px;color:var(--mut)}
+.tag{display:inline-block;background:var(--green);color:#fff;border-radius:6px;font-size:10px;padding:2px 7px;font-weight:700}
+.foot{font-size:11px;color:var(--mut);padding:10px 20px;border-top:1px solid var(--line);background:var(--soft)}
+.legend{font-size:11px;color:var(--mut);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="logo">Value<span>Forge</span></div>
+    <div class="ctx">Workspace: <b>Nestlé · APAC Beverages</b> &nbsp;|&nbsp; Maya Tan · Brand Manager</div>
+  </div>
+  <div class="note">⚠ Interactive wireframe (mock data) — illustrates the brand-manager flow from brief to a decision-ready strategy. Click the steps or sidebar to navigate.</div>
+
+  <div class="flow" id="flow">
+    <div class="step active" data-s="0"><div class="n">1</div><div class="t">Brief</div></div>
+    <div class="sep"></div>
+    <div class="step" data-s="1"><div class="n">2</div><div class="t">Sense</div></div>
+    <div class="sep"></div>
+    <div class="step" data-s="2"><div class="n">3</div><div class="t">Synthesize</div></div>
+    <div class="sep"></div>
+    <div class="step" data-s="3"><div class="n">4</div><div class="t">Create</div></div>
+    <div class="sep"></div>
+    <div class="step" data-s="4"><div class="n">5</div><div class="t">Screen</div></div>
+    <div class="sep"></div>
+    <div class="step" data-s="5"><div class="n">6</div><div class="t">Brief</div></div>
+  </div>
+
+  <div class="body">
+    <div class="side">
+      <h4>Workflow</h4>
+      <div class="nav active" data-s="0">① Define brief</div>
+      <div class="nav" data-s="1">② Sense — trends</div>
+      <div class="nav" data-s="2">③ Synthesize — needs</div>
+      <div class="nav" data-s="3">④ Create — concepts</div>
+      <div class="nav" data-s="4">⑤ Screen — resonance</div>
+      <div class="nav" data-s="5">⑥ Decision brief</div>
+      <h4 style="margin-top:16px">Workspace</h4>
+      <div class="nav">Saved strategies</div>
+      <div class="nav">Market packs</div>
+      <div class="nav">Settings</div>
+    </div>
+    <div class="main">
+
+      <!-- 0 BRIEF -->
+      <div class="screen active" data-s="0">
+        <div class="h">Start a strategy brief</div>
+        <div class="sub">Tell ValueForge the decision you need to make. Everything downstream is scoped to this.</div>
+        <div class="grid g2">
+          <div class="card">
+            <label>Brand</label><input class="inp" value="Nestlé — (beverage portfolio)">
+            <label>Market</label><input class="inp" value="Indonesia + Vietnam (SEA market pack)">
+            <label>Category</label><input class="inp" value="Ready-to-drink coffee & functional beverages">
+          </div>
+          <div class="card">
+            <label>Objective</label><input class="inp" value="Find a launch-ready concept for H2">
+            <label>Constraints</label><input class="inp" value="Halal · ambient supply chain · &lt; 12-mo to shelf">
+            <label>Audience</label><input class="inp" value="Urban Gen-Z, health-curious">
+            <div style="margin-top:8px"><span class="chip">SEA pack</span><span class="chip">18-lang NLP</span><span class="chip">Halal taxonomy</span></div>
+          </div>
+        </div>
+        <button class="btn" data-go="1">Run ValueForge ▸</button>
+      </div>
+
+      <!-- 1 SENSE -->
+      <div class="screen" data-s="1">
+        <div class="h">Sense — live trend signals</div>
+        <div class="sub">Local signals from e-commerce, menus, recipes, social & search for your market &amp; category.</div>
+        <div class="grid g2">
+          <div>
+            <div class="trend"><div><b>Cold-brew + adaptogens</b><div class="meta">Social + menus · Indonesia</div></div><div class="up">▲ 142% YoY</div></div>
+            <div class="trend"><div><b>Protein coffee (RTD)</b><div class="meta">E-com · SEA</div></div><div class="up">▲ 98% YoY</div></div>
+            <div class="trend"><div><b>Pandan / local botanicals</b><div class="meta">Recipes + social</div></div><div class="mom">▲ 61% momentum</div></div>
+            <div class="trend"><div><b>Low-sugar functional</b><div class="meta">Search · VN+ID</div></div><div class="up">▲ 75% YoY</div></div>
+          </div>
+          <div class="card soft">
+            <b>Signal quality</b>
+            <div class="legend">3.2M data points · 4 sources · last refresh 2h ago</div>
+            <label>Coverage by source</label>
+            <div style="font-size:12px">Social <div class="bar"><i style="width:88%"></i></div></div>
+            <div style="font-size:12px;margin-top:6px">E-commerce <div class="bar"><i style="width:72%"></i></div></div>
+            <div style="font-size:12px;margin-top:6px">Menus/recipes <div class="bar"><i style="width:64%"></i></div></div>
+            <div style="font-size:12px;margin-top:6px">Search <div class="bar"><i style="width:80%"></i></div></div>
+          </div>
+        </div>
+        <button class="btn" data-go="2">Synthesize into needs ▸</button>
+      </div>
+
+      <!-- 2 SYNTHESIZE -->
+      <div class="screen" data-s="2">
+        <div class="h">Synthesize — consumer needs &amp; white-space</div>
+        <div class="sub">Signals clustered into needs, mapped on need-intensity × competitive white-space. Green = launch zone.</div>
+        <div class="matrix">
+          <div class="quad" style="left:0;top:0;background:#9AA5B1">Niche bets<small>&nbsp;(crowded)</small></div>
+          <div class="quad" style="right:0;top:0;background:#385723">LAUNCH ZONE<small>&nbsp;need + open</small></div>
+          <div class="quad" style="left:0;bottom:0;background:#C7CDD6;color:#33405a">Park</div>
+          <div class="quad" style="right:0;bottom:0;background:#C8860D">Educate</div>
+          <div class="dot" style="right:24%;top:20%"></div><div class="lbl" style="right:10%;top:14%">Cold-brew + adaptogens</div>
+          <div class="dot" style="right:30%;top:34%"></div><div class="lbl" style="right:16%;top:40%">Protein RTD coffee</div>
+          <div class="dot" style="left:30%;top:30%"></div><div class="lbl" style="left:6%;top:24%">Generic energy</div>
+          <div class="dot" style="right:34%;bottom:24%"></div><div class="lbl" style="right:14%;bottom:16%">Pandan botanicals</div>
+          <div class="ax" style="left:8px;bottom:6px">low ← competitive white-space → high</div>
+        </div>
+        <div class="legend">2 needs land in the launch zone — strong, under-served. These advance to concepting.</div>
+        <button class="btn" data-go="3">Generate concepts ▸</button>
+      </div>
+
+      <!-- 3 CREATE -->
+      <div class="screen" data-s="3">
+        <div class="h">Create — on-brand concepts</div>
+        <div class="sub">Concept Genie generates concepts against the launch-zone needs, scoped to your brand DNA &amp; constraints.</div>
+        <div class="grid g3">
+          <div class="card"><span class="tag">Launch zone</span><h3 style="margin:8px 0 4px;color:var(--navy)">Nescafé Calm Cold-Brew</h3><div class="meta" style="font-size:12px;color:var(--mut)">Adaptogenic cold-brew (ashwagandha + L-theanine), low-sugar, ambient. Halal.</div></div>
+          <div class="card"><span class="tag">Launch zone</span><h3 style="margin:8px 0 4px;color:var(--navy)">Nescafé Protein Pull</h3><div class="meta" style="font-size:12px;color:var(--mut)">15g-protein RTD coffee, urban Gen-Z, gym-adjacent.</div></div>
+          <div class="card"><span class="tag" style="background:#C8860D">Educate</span><h3 style="margin:8px 0 4px;color:var(--navy)">Pandan Brew</h3><div class="meta" style="font-size:12px;color:var(--mut)">Local-botanical cold coffee; needs category education.</div></div>
+        </div>
+        <button class="btn" data-go="4">Screen for resonance ▸</button>
+      </div>
+
+      <!-- 4 SCREEN -->
+      <div class="screen" data-s="4">
+        <div class="h">Screen — predicted resonance (explainable)</div>
+        <div class="sub">Each concept ranked by resonance, with the drivers shown — so you can defend the call.</div>
+        <table>
+          <thead><tr><th>Concept</th><th>Resonance</th><th>Top drivers (why)</th><th>Segment</th></tr></thead>
+          <tbody>
+            <tr><td><b>Calm Cold-Brew</b></td><td><span class="score">87</span></td>
+              <td><div class="drv"><i style="width:46px;background:#385723"></i>need&nbsp; <i style="width:30px;background:#2F9E8F"></i>white-space&nbsp; <i style="width:18px;background:#2E5496"></i>fit</div></td><td>Urban Gen-Z</td></tr>
+            <tr><td><b>Protein Pull</b></td><td><span class="score">79</span></td>
+              <td><div class="drv"><i style="width:40px;background:#385723"></i>need&nbsp; <i style="width:20px;background:#2F9E8F"></i>white-space&nbsp; <i style="width:24px;background:#2E5496"></i>fit</div></td><td>Gym / fitness</td></tr>
+            <tr><td>Pandan Brew</td><td><span class="score" style="color:#C8860D">58</span></td>
+              <td><div class="drv"><i style="width:30px;background:#385723"></i>need&nbsp; <i style="width:34px;background:#2F9E8F"></i>white-space&nbsp; <i style="width:10px;background:#C0392B"></i>education gap</div></td><td>Local-first</td></tr>
+          </tbody>
+        </table>
+        <div class="legend">Driver bars = SHAP-style contribution of each factor to the score (green/blue push up, red pulls down).</div>
+        <button class="btn alt" data-go="5">Build decision brief ▸</button>
+      </div>
+
+      <!-- 5 BRIEF -->
+      <div class="screen" data-s="5">
+        <div class="h">Decision-ready strategy brief</div>
+        <div class="sub">One artifact your leadership can approve — recommendation, evidence, and next step.</div>
+        <div class="brief">
+          <span class="tag">RECOMMENDED</span>
+          <h3>Launch “Nescafé Calm Cold-Brew” in Indonesia (H2), Vietnam fast-follow</h3>
+          <div class="kpis">
+            <div class="kpi"><div class="v">87</div><div class="l">Resonance score</div></div>
+            <div class="kpi"><div class="v">Urban Gen-Z</div><div class="l">Target segment</div></div>
+            <div class="kpi"><div class="v">High</div><div class="l">White-space</div></div>
+            <div class="kpi"><div class="v">&lt;12 mo</div><div class="l">To shelf (fits constraint)</div></div>
+          </div>
+          <h3>Why it resonates</h3>
+          <div style="font-size:13px;color:var(--ink)">Strong, under-served need (adaptogenic + low-sugar cold-brew, ▲142% YoY) with brand fit and ambient/halal feasibility. Positioning: calm, functional energy for health-curious urban Gen-Z.</div>
+          <h3>Evidence &amp; assumptions</h3>
+          <div style="font-size:13px;color:var(--mut)">3.2M signals · 4 sources · SEA market pack · halal taxonomy. Key assumption: category education low (need already present). Risk: protein variant cannibalization — monitor.</div>
+          <div style="margin-top:14px">
+            <button class="btn">⤓ Export brief (PDF / deck)</button>
+            <button class="btn ghost">Share for sign-off</button>
+            <button class="btn ghost">Push to NPD stage-gate</button>
+          </div>
+        </div>
+        <div class="legend">From brief to decision-ready recommendation — minutes, not weeks.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="foot">ValueForge interactive wireframe · brand-manager journey (Brief → Sense → Synthesize → Create → Screen → Decision brief) · mock data for illustration.</div>
+</div>
+
+<script>
+const steps=[...document.querySelectorAll('.step')];
+const navs=[...document.querySelectorAll('.side .nav[data-s]')];
+const screens=[...document.querySelectorAll('.screen')];
+function go(s){
+  s=+s;
+  screens.forEach(x=>x.classList.toggle('active', +x.dataset.s===s));
+  steps.forEach(x=>{const i=+x.dataset.s; x.classList.toggle('active',i===s); x.classList.toggle('done',i<s);});
+  navs.forEach(x=>x.classList.toggle('active', +x.dataset.s===s));
+  document.querySelector('.main').scrollTop=0;
+}
+document.querySelectorAll('[data-s]').forEach(el=>{
+  if(el.dataset.s!==undefined && (el.classList.contains('step')||el.classList.contains('nav')))
+    el.addEventListener('click',()=>go(el.dataset.s));
+});
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+</script>
+</body>
+</html>

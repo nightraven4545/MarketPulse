@@ -1,0 +1,14 @@
+Capability,Layer,Localize,Value_driver,Localization_cost,Verdict
+ML/forecasting core,Engine,Global,Low,n/a,Standardize 100%
+Concept Genie generative model,Engine,Global,Low,Low,Standardize; localize inputs
+Data ingestion framework,Engine,Global,Low,n/a,Standardize
+Local data sources (e-com/menus/retail/social),Edge,Localize,High,High-ongoing,Localize as config (do first)
+Language / NLP packs,Edge,Localize,High,Medium-ongoing,Localize via packs
+Category taxonomy,Edge,Localize,High,Medium,Localize as data
+Brand/competitor reference sets,Edge,Localize,Medium,Medium,Localize as data
+Compliance / data residency,Edge,Localize,Required,Medium-ongoing,Localize by region
+Enterprise workflow integrations,Edge,Localize-tiered,Medium,High,Enterprise tier only
+Reporting/export templates/currency/units,Edge,Localize,Low,Low,Localize (i18n)
+UI translation,Edge,Localize-light,Low,Low,Defer; English-first ok
+Pricing/contracting/invoicing,Commercial,Localize,Medium,Low-Med,Localize commercially
+Onboarding & support content/hours,Service,Localize-tiered,Medium,Medium,Localize by tier+region

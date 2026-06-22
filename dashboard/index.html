@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarketPulse — Ai Palette Expansion & Monetization Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--navy:#1F3864;--blue:#2E5496;--acc:#2F9E8F;--green:#385723;--amber:#C8860D;--ink:#222;--mut:#5b6573;--line:#e4e8ee;--bg:#f5f7fa;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 60px}
+header.hero{background:linear-gradient(135deg,#1F3864,#2E5496);color:#fff;padding:34px 0 30px;margin-bottom:26px;border-bottom:5px solid var(--acc)}
+.hero .wrap{padding-bottom:0}
+.kicker{color:#9ec7e8;font-weight:700;letter-spacing:.08em;font-size:12px;text-transform:uppercase}
+h1{font-size:30px;margin:6px 0 4px;letter-spacing:-.5px}
+.sub{color:#cdd9e8;font-size:15px;max-width:760px}
+.disc{margin-top:14px;font-size:12px;color:#bcd0e6;background:rgba(255,255,255,.08);border-left:3px solid var(--acc);padding:8px 12px;border-radius:4px;max-width:780px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 8px}
+.tab{background:#fff;border:1px solid var(--line);color:var(--mut);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--blue);color:var(--blue)}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.section-title{font-size:13px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.06em;margin:30px 0 12px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:"";width:18px;height:3px;background:var(--acc);border-radius:2px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(20,40,80,.04)}
+.card h3{font-size:15px;color:var(--navy);margin-bottom:3px}
+.card .cap{font-size:12px;color:var(--mut);margin-bottom:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;border-top:4px solid var(--blue)}
+.kpi .v{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+.kpi .l{font-size:12px;color:var(--mut);margin-top:3px}
+.kpi.a{border-top-color:var(--acc)}.kpi.g{border-top-color:var(--green)}.kpi.m{border-top-color:var(--amber)}
+.chart-box{position:relative;height:300px}
+.chart-box.tall{height:340px}
+canvas{max-width:100%}
+table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+table.tbl th{background:var(--blue);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+table.tbl td{padding:7px 10px;border-bottom:1px solid var(--line)}
+table.tbl tr:nth-child(even) td{background:#f7f9fc}
+.badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;color:#fff}
+.w1{background:var(--green)}.w2{background:var(--blue)}.w3{background:var(--amber)}.wl{background:#8a93a3}
+/* pipeline */
+.pipe{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.pseg{flex:1;min-width:150px;border-radius:10px;padding:12px;color:#fff;font-size:12.5px;text-align:center}
+.pseg b{display:block;font-size:13.5px;margin-bottom:3px}
+.parrow{display:flex;align-items:center;color:#9aa5b1;font-size:22px;padding:0 4px}
+.glob{background:#2E5496}.loc{background:#2F9E8F}
+.legend{display:flex;gap:18px;font-size:12px;color:var(--mut);margin-top:10px}
+.dot{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:middle}
+/* flow */
+.flow{display:flex;gap:0;flex-wrap:wrap;align-items:center}
+.fstep{flex:1;min-width:135px;background:#fff;border:2px solid var(--blue);border-radius:10px;padding:11px;text-align:center;font-size:12px}
+.fstep b{display:block;color:var(--navy);font-size:13px;margin-bottom:2px}
+.fstep.s3{border-color:var(--acc)} .fstep.s5{border-color:var(--green)}
+.farrow{color:#9aa5b1;font-size:20px;font-weight:700;padding:0 6px}
+.note{font-size:12px;color:var(--mut);margin-top:10px;font-style:italic}
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--mut);text-align:center}
+.hide{display:none}
+.tier-flag{font-weight:700}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker">MarketPulse · Solution Visualization</div>
+  <h1>Ai Palette — Expansion &amp; Monetization Dashboard</h1>
+  <div class="sub">A structured view of the strategy: market sequencing, the localize-vs-standardize split, tiering, hybrid pricing, go-to-market, and the repeatable market-entry engine.</div>
+  <div class="disc">⚠ Ai Palette is a private company — there are no public financials. All figures are illustrative, benchmark-anchored estimates built for decision logic, not company-reported numbers.</div>
+</div></header>
+
+<div class="wrap">
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-t="all">Overview</div>
+    <div class="tab" data-t="market">Market &amp; Competition</div>
+    <div class="tab" data-t="product">Localization &amp; Tiers</div>
+    <div class="tab" data-t="money">Pricing &amp; GTM</div>
+    <div class="tab" data-t="engine">Sequencing &amp; Engine</div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="grid g4" data-sec="all market">
+    <div class="kpi"><div class="v">~$16B</div><div class="l">TAM · AI in Food &amp; Beverage (2025)</div></div>
+    <div class="kpi a"><div class="v">~$5–6B</div><div class="l">SAM · CPG / trend-intelligence software</div></div>
+    <div class="kpi g"><div class="v">~$30–60M</div><div class="l">SOM · 3-yr obtainable (illustrative)</div></div>
+    <div class="kpi m"><div class="v">≥110%</div><div class="l">Target blended NRR</div></div>
+  </div>
+
+  <!-- MARKET -->
+  <div class="section-title" data-sec="all market">Market sequencing — scored, not guessed</div>
+  <div class="grid g2" data-sec="all market">
+    <div class="card"><h3>Market attractiveness (weighted score)</h3>
+      <div class="cap">Weighted rubric, 0–5. Colour = entry wave.</div>
+      <div class="chart-box"><canvas id="cScore"></canvas></div></div>
+    <div class="card"><h3>Top-3 markets — criteria profile</h3>
+      <div class="cap">Where each market wins vs. loses (1–5 per criterion).</div>
+      <div class="chart-box"><canvas id="cRadar"></canvas></div></div>
+  </div>
+
+  <div class="grid g2" data-sec="all market">
+    <div class="card"><h3>TAM → SAM → SOM</h3>
+      <div class="cap">Order-of-magnitude funnel ($).</div>
+      <div class="chart-box"><canvas id="cFunnel"></canvas></div></div>
+    <div class="card"><h3>Competitive positioning — the white space</h3>
+      <div class="cap">Workflow breadth × geo/localization depth. Bubble = relative breadth.</div>
+      <div class="chart-box"><canvas id="cPos"></canvas></div></div>
+  </div>
+
+  <div class="card" data-sec="all market"><h3>Why now — the category is consolidating</h3>
+    <div class="cap">Mintel acquired Black Swan Data (Jun 2025), absorbing the strongest pure-play predictor into a legacy incumbent — vacating the nimble, end-to-end, multi-market NPD position.</div>
+    <table class="tbl"><thead><tr><th>Player</th><th>Core focus</th><th>Geo strength</th><th>Position vs. Ai Palette</th></tr></thead>
+    <tbody>
+      <tr><td><b>Ai Palette</b></td><td>End-to-end: discover → concept → screen</td><td>APAC (18 langs/24 ctry)</td><td>Owns the white space</td></tr>
+      <tr><td>Tastewise</td><td>F&amp;B consumer-data platform</td><td>US/global</td><td>Strong F&amp;B, narrower category</td></tr>
+      <tr><td>Black Swan → Mintel</td><td>Social predictive analytics</td><td>UK/global</td><td>Absorbed into incumbent (Jun-25)</td></tr>
+      <tr><td>Mintel</td><td>Structured research + GNPD</td><td>Global incumbent</td><td>Broad but slow, not NPD-native</td></tr>
+      <tr><td>Spate</td><td>Beauty/wellness trends</td><td>US</td><td>Narrow vertical</td></tr>
+      <tr><td>Datassential</td><td>Menus &amp; foodservice</td><td>US</td><td>Adjacent, not packaged-goods NPD</td></tr>
+    </tbody></table>
+  </div>
+
+  <!-- PRODUCT -->
+  <div class="section-title" data-sec="all product">Phase 1 — localize the edge, standardize the engine</div>
+  <div class="card" data-sec="all product"><h3>Solution architecture — the pipeline</h3>
+    <div class="cap">The intelligence is universal; only the two ends are local. Localization ships as configurable Market Packs, never code forks.</div>
+    <div class="pipe">
+      <div class="pseg loc"><b>Local data sources</b>e-com · menus · recipes · social · search</div>
+      <div class="parrow">›</div>
+      <div class="pseg glob"><b>ML / NLP core</b>forecasting · ranking</div>
+      <div class="parrow">›</div>
+      <div class="pseg glob"><b>Concept &amp; screen engine</b>Concept Genie · Screen Winner</div>
+      <div class="parrow">›</div>
+      <div class="pseg loc"><b>Local workflow</b>integrations · compliance · GTM</div>
+    </div>
+    <div class="legend"><span><span class="dot glob"></span>Global — build once (~80% of code)</span><span><span class="dot loc"></span>Localized edge — Market Pack (~20%)</span></div>
+  </div>
+  <div class="grid g2" data-sec="all product">
+    <div class="card"><h3>Localize vs. standardize (effort split)</h3>
+      <div class="cap">~80% shared engine, ~20% localizable edge.</div>
+      <div class="chart-box"><canvas id="cSplit"></canvas></div></div>
+    <div class="card"><h3>Feature tiering by enterprise maturity</h3>
+      <div class="cap">One product gated by entitlements.</div>
+      <table class="tbl"><thead><tr><th>Capability</th><th>Essentials</th><th>Growth</th><th>Enterprise</th></tr></thead>
+      <tbody>
+        <tr><td>Markets / categories</td><td>1 / ~3</td><td>Few / expanded</td><td>All</td></tr>
+        <tr><td>Concept Genie</td><td>—</td><td>Credits</td><td>Higher</td></tr>
+        <tr><td>Integrations / residency</td><td>—</td><td>—</td><td>Included</td></tr>
+        <tr><td>Support</td><td>Self-serve</td><td>Priority</td><td>CSM + SLA</td></tr>
+        <tr><td class="tier-flag">Motion</td><td>PLG-assisted</td><td>Hybrid</td><td>Sales-led</td></tr>
+        <tr><td class="tier-flag">Target ACV</td><td>&lt;$10K</td><td>$25–60K</td><td>$80K+</td></tr>
+      </tbody></table></div>
+  </div>
+
+  <!-- MONEY -->
+  <div class="section-title" data-sec="all money">Phase 2 — hybrid monetization &amp; go-to-market</div>
+  <div class="grid g2" data-sec="all money">
+    <div class="card"><h3>Tier subscription (US benchmark, $)</h3>
+      <div class="cap">Anchored on subscription; usage &amp; seats expand. Ratio ~1 : 4 : 12.</div>
+      <div class="chart-box"><canvas id="cTiers"></canvas></div></div>
+    <div class="card"><h3>Regional willingness-to-pay (price index)</h3>
+      <div class="cap">Same product, repriced — price localization, not product localization.</div>
+      <div class="chart-box"><canvas id="cWtp"></canvas></div></div>
+  </div>
+  <div class="card" data-sec="all money"><h3>Motion follows ACV</h3>
+    <div class="cap">Spend human service only where ACV pays for it; automate below.</div>
+    <table class="tbl"><thead><tr><th>Tier</th><th>ACV</th><th>Buying</th><th>Motion</th><th>Cost-to-serve</th></tr></thead>
+    <tbody>
+      <tr><td>Essentials</td><td>&lt;$10K</td><td>1–2 people</td><td>PLG-assisted</td><td>Very low (scales)</td></tr>
+      <tr><td>Growth</td><td>$25–60K</td><td>Small team</td><td>Hybrid (PLG→AE)</td><td>Medium</td></tr>
+      <tr><td>Enterprise</td><td>$80K+</td><td>Committee</td><td>Sales-led (AE+SE+CSM)</td><td>High (justified by ACV)</td></tr>
+    </tbody></table></div>
+
+  <!-- ENGINE -->
+  <div class="section-title" data-sec="all engine">The automated market-entry engine</div>
+  <div class="card" data-sec="all engine"><h3>Strategy as a workflow</h3>
+    <div class="cap">Same logic every time; only the inputs change. Step 3 is deterministic rules, not opinions.</div>
+    <div class="flow">
+      <div class="fstep s1"><b>1 · Intake</b>market signals</div><div class="farrow">›</div>
+      <div class="fstep s2"><b>2 · Score</b>weighted rubric</div><div class="farrow">›</div>
+      <div class="fstep s3"><b>3 · Decide</b>tier · price · motion</div><div class="farrow">›</div>
+      <div class="fstep s4"><b>4 · Provision</b>Market Pack + GTM</div><div class="farrow">›</div>
+      <div class="fstep s5"><b>5 · Monitor</b>expand or exit</div>
+    </div>
+    <div class="note">Decision rule example: regulated · high-density · high-WTP → full pack + residency + integrations → Enterprise · 0.85–1.0× → sales-led.</div>
+  </div>
+  <div class="card" data-sec="all engine"><h3>3-wave entry roadmap</h3>
+    <div class="cap">Each wave reuses the prior wave's assets, so marginal cost of entry falls.</div>
+    <div class="chart-box tall"><canvas id="cRoad"></canvas></div>
+    <div class="legend">
+      <span><span class="dot w1" style="background:#385723"></span>Wave 1 · deepen SEA + India</span>
+      <span><span class="dot w2" style="background:#2E5496"></span>Wave 2 · attack US</span>
+      <span><span class="dot w3" style="background:#C8860D"></span>Wave 3 · EU + Japan/Korea</span>
+    </div>
+  </div>
+
+  <div class="card" data-sec="all engine"><h3>Commercial architecture — one-look map</h3>
+    <table class="tbl"><thead><tr><th>Market</th><th>Wave</th><th>Lead tier</th><th>Localization depth</th><th>Price idx</th><th>Lead ACV*</th><th>Motion</th></tr></thead>
+    <tbody>
+      <tr><td>SEA</td><td><span class="badge w1">1</span></td><td>Growth</td><td>Standard pack + taxonomy</td><td>0.55</td><td>~$19K</td><td>Hybrid</td></tr>
+      <tr><td>India</td><td><span class="badge w1">1</span></td><td>Essentials/Growth</td><td>Standard · volume</td><td>0.45</td><td>~$16K</td><td>PLG-assisted</td></tr>
+      <tr><td>US</td><td><span class="badge w2">2</span></td><td>Enterprise</td><td>Full + residency + integrations</td><td>1.00</td><td>~$120K</td><td>Sales-led</td></tr>
+      <tr><td>W. Europe</td><td><span class="badge w3">3</span></td><td>Enterprise</td><td>Full + GDPR (reuse US)</td><td>0.90</td><td>~$108K</td><td>Sales-led</td></tr>
+      <tr><td>Japan/Korea</td><td><span class="badge w3">3</span></td><td>Enterprise</td><td>Full via partner</td><td>0.82</td><td>~$98K</td><td>Partner-led</td></tr>
+      <tr><td>Middle East</td><td><span class="badge wl">Later</span></td><td>Growth</td><td>Standard · inbound/partner</td><td>0.70</td><td>~$25K</td><td>Partner/inbound</td></tr>
+      <tr><td>LATAM</td><td><span class="badge wl">Later</span></td><td>Essentials/Growth</td><td>Minimal→standard</td><td>0.50</td><td>~$18K</td><td>PLG-assisted</td></tr>
+    </tbody></table>
+    <div class="note">*Lead ACV = US tier benchmark × regional price index. Compliance built once (US) is reused (EU); the partner model built for Japan is reused (MEA).</div>
+  </div>
+
+  <footer>MarketPulse · Ai Palette Multi-Market Expansion &amp; Monetization Strategy · Solution dashboard · Figures are illustrative, benchmark-anchored estimates.</footer>
+</div>
+
+<script>
+const NAVY="#1F3864",BLUE="#2E5496",ACC="#2F9E8F",GREEN="#385723",AMBER="#C8860D",GREY="#8a93a3";
+Chart.defaults.font.family="-apple-system,Segoe UI,Arial,sans-serif";
+Chart.defaults.font.size=11;Chart.defaults.color="#5b6573";
+
+new Chart(cScore,{type:'bar',data:{labels:['SEA','India','US','W. Europe','Japan/Korea','Middle East','LATAM'],
+ datasets:[{data:[4.05,3.95,3.60,3.25,3.20,2.95,2.50],
+ backgroundColor:[GREEN,GREEN,BLUE,AMBER,AMBER,GREY,GREY]}]},
+ options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{min:0,max:5,title:{display:true,text:'Weighted score (0–5)'}}}}});
+
+new Chart(cRadar,{type:'radar',data:{labels:['Revenue','Data-ready','Home adv','Comp (inv)','Reg (inv)','Cost (inv)'],
+ datasets:[
+ {label:'SEA',data:[3,5,5,4,4,4],borderColor:GREEN,backgroundColor:'rgba(56,87,35,.12)'},
+ {label:'India',data:[3,5,5,4,3,4],borderColor:ACC,backgroundColor:'rgba(47,158,143,.10)'},
+ {label:'US',data:[5,4,2,2,4,3],borderColor:BLUE,backgroundColor:'rgba(46,84,150,.10)'}]},
+ options:{scales:{r:{min:0,max:5,ticks:{stepSize:1,display:false}}},plugins:{legend:{position:'bottom'}}}});
+
+new Chart(cFunnel,{type:'bar',data:{labels:['TAM ($16B)','SAM ($5.5B)','SOM ($45M)'],
+ datasets:[{data:[16000,5500,45],backgroundColor:[NAVY,BLUE,ACC]}]},
+ options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.raw+'M'}}},
+ scales:{x:{type:'logarithmic',title:{display:true,text:'$ millions (log scale)'}}}}});
+
+new Chart(cPos,{type:'bubble',data:{datasets:[
+ {label:'Ai Palette',data:[{x:9,y:9,r:18}],backgroundColor:'rgba(47,158,143,.75)'},
+ {label:'Tastewise',data:[{x:4,y:7,r:11}],backgroundColor:'rgba(46,84,150,.6)'},
+ {label:'Mintel (+Black Swan)',data:[{x:7,y:4,r:15}],backgroundColor:'rgba(31,56,100,.6)'},
+ {label:'Spate',data:[{x:3,y:4,r:9}],backgroundColor:'rgba(138,147,163,.6)'},
+ {label:'Datassential',data:[{x:3,y:3,r:9}],backgroundColor:'rgba(138,147,163,.5)'}]},
+ options:{plugins:{legend:{position:'bottom'}},scales:{
+ x:{min:0,max:10,title:{display:true,text:'Western-centric  →  multi-market / APAC depth'}},
+ y:{min:0,max:10,title:{display:true,text:'single insight  →  end-to-end workflow'}}}}});
+
+new Chart(cSplit,{type:'doughnut',data:{labels:['Global engine (build once)','Localized edge (Market Pack)'],
+ datasets:[{data:[80,20],backgroundColor:[BLUE,ACC]}]},
+ options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+': '+c.raw+'%'}}}}});
+
+new Chart(cTiers,{type:'bar',data:{labels:['Essentials','Growth','Enterprise'],
+ datasets:[{data:[8000,35000,120000],backgroundColor:[ACC,BLUE,NAVY]}]},
+ options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.raw.toLocaleString()}}},
+ scales:{y:{title:{display:true,text:'Annual subscription ($)'},ticks:{callback:v=>'$'+(v/1000)+'K'}}}}});
+
+new Chart(cWtp,{type:'bar',data:{labels:['US','W. Europe','Japan/Korea','SEA','India'],
+ datasets:[{data:[1.00,0.90,0.82,0.55,0.45],backgroundColor:[NAVY,BLUE,BLUE,ACC,ACC]}]},
+ options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:1.1,title:{display:true,text:'Price index (US = 1.00)'}}}}});
+
+// roadmap gantt
+const months=['M0','M3','M6','M9','M12','M15','M18','M21','M24','M27','M30'];
+new Chart(cRoad,{type:'bar',data:{labels:['Wave 1 · SEA + India','Wave 2 · US','Wave 3 · EU + JP/KR'],
+ datasets:[{data:[[0,9],[6,18],[18,30]],backgroundColor:[GREEN,BLUE,AMBER],borderRadius:5,barPercentage:.6}]},
+ options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Months '+c.raw[0]+'–'+c.raw[1]}}},
+ scales:{x:{min:0,max:30,title:{display:true,text:'Months from launch'},ticks:{stepSize:6}}}}});
+
+// tab filtering
+const tabs=document.querySelectorAll('.tab');
+function applyTab(t){
+ document.querySelectorAll('[data-sec]').forEach(el=>{
+   const secs=el.getAttribute('data-sec').split(' ');
+   el.classList.toggle('hide', !(t==='all'||secs.includes(t)));
+ });
+}
+tabs.forEach(tb=>tb.addEventListener('click',()=>{
+ tabs.forEach(x=>x.classList.remove('active'));tb.classList.add('active');applyTab(tb.dataset.t);
+}));
+applyTab('all');
+</script>
+</body>
+</html>
