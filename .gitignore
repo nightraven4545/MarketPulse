@@ -13,3 +13,6 @@ __pycache__/
 
 # local helper (not for repo)
 push_to_github.bat
+
+# claude code local config (machine-specific)
+.claude/
