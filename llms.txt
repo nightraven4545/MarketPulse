@@ -1,6 +1,6 @@
 # MarketPulse
 
-> Multi-market expansion and monetization strategy case study for Ai Palette (an AI-powered consumer-insights platform based in Singapore). Defines what to standardize vs. localize, how to tier and price features per market, and which go-to-market motion to use — backed by an MDP-based market-sequencing model, SHAP-style score explainability, and a bottoms-up ARR model (~$9.2M Year 3 / $28M Year 5). All figures are estimates anchored to public benchmarks; Ai Palette is privately held with no public financials.
+> Multi-market expansion and monetization strategy case study for Ai Palette (an AI-powered consumer-insights platform based in Singapore). Defines what to standardize vs. localize, how to tier and price features per market, and which go-to-market motion to use — backed by an MDP-based market-sequencing model, SHAP-style score explainability, and a bottoms-up ARR model (~$9.2M Year 3 / $28M Year 5). All figures are estimates anchored to public benchmarks; Ai Palette is privately held with no public financials. A fully interactive version is deployed as a Next.js web app on Vercel at https://market-pulse-nine-rho.vercel.app.
 
 ## Core documents
 
@@ -22,6 +22,7 @@
 
 ## Interactive tools
 
+- https://market-pulse-nine-rho.vercel.app: Live interactive web app (Next.js on Vercel) — solution dashboard, a live bottoms-up ARR model, the MDP + SHAP decision-science tools, the full written strategy (11 chapters), and downloadable deliverables. Source code in [web/](web/).
 - [dashboard/index.html](dashboard/index.html): Interactive solution dashboard (Chart.js).
 - [wireframe/index.html](wireframe/index.html): Clickable brand-manager product wireframe.
 - [arr-model/](arr-model/): Streamlit ARR model app with tornado sensitivity and live MDP slider.

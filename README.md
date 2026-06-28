@@ -16,6 +16,8 @@
 
 ### 🔗 Open it live — no download needed
 
+[![Launch the live app](https://img.shields.io/badge/▶_Launch_the_full_interactive_app-MarketPulse_on_Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://market-pulse-nine-rho.vercel.app)
+
 [![Executive Deck](https://img.shields.io/badge/🎞_View_Deck-Executive_Presentation-1F3864?style=for-the-badge)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fnightraven4545%2FMarketPulse%2Fmain%2Fdeliverables%2FDeliverableA_Executive_Presentation.pptx)
 [![Strategy PDF](https://img.shields.io/badge/📄_Open_PDF-Executive_Presentation-2E5496?style=for-the-badge)](deliverables/DeliverableA_Executive_Presentation.pdf)
 [![Live Dashboard](https://img.shields.io/badge/🖥_Live_Demo-Interactive_Dashboard-2F9E8F?style=for-the-badge)](https://raw.githack.com/nightraven4545/MarketPulse/main/dashboard/index.html)
@@ -67,7 +69,23 @@
 
 ## What is MarketPulse?
 
-**MarketPulse is a multi-market expansion and monetization strategy case study for [Ai Palette](https://www.aipalette.com/)**, a Singapore-based AI consumer-insights and product-innovation platform. The repo answers four questions with quantified, source-traceable frameworks: **what to standardize vs. localize**, **how to package features into pricing tiers**, **how to price by market**, and **which go-to-market motion to use** — backed by a Markov Decision Process (MDP) for market sequencing, a SHAP-style explainability layer for scoring, and a bottoms-up ARR model (**≈$9.2M Year 3 / $28M Year 5**). It includes an executive presentation, a commercial-architecture workbook, a consulting strategy memo, an interactive dashboard, and a clickable product wireframe — all built from public benchmarks, not Ai Palette's internal data.
+**MarketPulse is a multi-market expansion and monetization strategy case study for [Ai Palette](https://www.aipalette.com/)**, a Singapore-based AI consumer-insights and product-innovation platform. The repo answers four questions with quantified, source-traceable frameworks: **what to standardize vs. localize**, **how to package features into pricing tiers**, **how to price by market**, and **which go-to-market motion to use** — backed by a Markov Decision Process (MDP) for market sequencing, a SHAP-style explainability layer for scoring, and a bottoms-up ARR model (**≈$9.2M Year 3 / $28M Year 5**). It includes an executive presentation, a commercial-architecture workbook, a consulting strategy memo, an interactive dashboard, and a clickable product wireframe — all built from public benchmarks, not Ai Palette's internal data. **Try it live:** the entire case is deployed as an interactive web app at **[market-pulse-nine-rho.vercel.app](https://market-pulse-nine-rho.vercel.app)** — no install required.
+
+## Live interactive web app
+
+**▶ Live demo: [market-pulse-nine-rho.vercel.app](https://market-pulse-nine-rho.vercel.app)**
+
+The whole strategy is also a deployed, interactive product — a **Next.js** web app (TypeScript, Tailwind CSS, Recharts) hosted on **Vercel**. Nothing to install:
+
+| Section | What you can do |
+|---------|-----------------|
+| [**Dashboard**](https://market-pulse-nine-rho.vercel.app/dashboard) | Explore market-attractiveness scores, the TAM → SAM → SOM funnel, the competitive-positioning 2×2, the localize-vs-standardize split, tiered pricing, regional willingness-to-pay, and the 3-wave roadmap. |
+| [**ARR Model**](https://market-pulse-nine-rho.vercel.app/arr-model) | Drag the assumptions on a live bottoms-up ARR calculator and watch every chart (build, new-vs-expansion, tornado sensitivity) recompute instantly. Base case ≈ $9.2M Year 3 / $28M Year 5. |
+| [**Decision Science**](https://market-pulse-nine-rho.vercel.app/decision-science) | Run an interactive Markov Decision Process (MDP) market-entry sequencer and re-weight a SHAP-style score explainer in the browser. |
+| [**Strategy**](https://market-pulse-nine-rho.vercel.app/strategy) | Read the full written case — 11 chapters with a chapter navigator. |
+| [**Deliverables**](https://market-pulse-nine-rho.vercel.app/deliverables) | View or download the executive deck, commercial-architecture workbook, ARR model, strategy memo, and one-page cheat sheet. |
+
+Run it locally with `cd web && npm install && npm run dev`.
 
 ## FAQ
 
@@ -91,6 +109,12 @@ A Markov Decision Process (MDP) for optimal market-entry sequencing under uncert
 
 **Who is this repo for?**
 Product strategists, GTM/RevOps teams, and consultants studying multi-market SaaS expansion, tiered pricing design, or localization-vs-standardization tradeoffs — and anyone evaluating this as a portfolio case study.
+
+**Is there a live demo of MarketPulse?**
+Yes. A fully interactive web app is deployed on Vercel at **[market-pulse-nine-rho.vercel.app](https://market-pulse-nine-rho.vercel.app)**. It includes the solution dashboard, a live ARR model you can drive with sliders, the MDP + SHAP decision-science tools, the full written strategy, and downloadable deliverables — no sign-up or install required.
+
+**What is MarketPulse built with?**
+The interactive web app is built with Next.js (App Router), TypeScript, Tailwind CSS, and Recharts, and is deployed on Vercel. The standalone ARR model is a Python/Streamlit app; the MDP solver and SHAP-style explainer are plain Python (NumPy + Matplotlib); and the underlying data lives in machine-readable CSVs under [`frameworks/`](frameworks/).
 
 ---
 
@@ -141,14 +165,25 @@ See **[`DELIVERABLES.md`](DELIVERABLES.md)** for the full index mapped to the br
 4. **Motion follows ACV**: PLG-assisted for Essentials (ACV <$10K), sales-led for Enterprise (ACV >$25K, committee buying). Hybrid in between.
 5. **Sequence**: Wave 1 deepen SEA + India (home advantage), Wave 2 attack US (highest willingness-to-pay), Wave 3 EU + Middle East. Driven by the scoring rubric, not gut feel.
 
-## How to use / push this repo
+## Run it locally
+
+**Live app:** [market-pulse-nine-rho.vercel.app](https://market-pulse-nine-rho.vercel.app) · **Source:** [github.com/nightraven4545/MarketPulse](https://github.com/nightraven4545/MarketPulse)
+
 ```bash
-cd marketpulse-strategy
-git init
-git add .
-git commit -m "MarketPulse: Ai Palette expansion & monetization strategy"
-git branch -M main
-git remote add origin https://github.com/<you>/marketpulse-strategy.git
-git push -u origin main
+git clone https://github.com/nightraven4545/MarketPulse.git
+cd MarketPulse
+
+# 1) the interactive web app (Next.js) — the live site
+cd web && npm install && npm run dev      # → http://localhost:3000
+
+# 2) the ARR model (Python / Streamlit)
+cd ../arr-model && pip install -r requirements.txt && streamlit run app.py
+
+# 3) the decision-science engine (MDP + SHAP)
+cd ../decision-science && pip install -r requirements.txt
+python mdp_sequencing.py && python explain_scores.py
 ```
+
+The web app is deployed on **Vercel** with the project **Root Directory** set to `web`; every push to `main` redeploys automatically.
+
 See [`docs/02`](docs/02-assumptions-and-data-sources.md) for the disclaimer to keep visible to evaluators: *numbers are illustrative, defensible estimates — not company-reported figures.*
