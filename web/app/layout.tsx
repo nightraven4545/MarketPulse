@@ -18,7 +18,11 @@ export const metadata: Metadata = {
   title: "MarketPulse — Ai Palette Expansion & Monetization Strategy",
   description:
     "An interactive market-entry, pricing, and decision-science platform for Ai Palette's multi-market expansion — market sequencing, tiered pricing, ARR modeling, and MDP + SHAP decision science.",
-  metadataBase: new URL("https://marketpulse.vercel.app"),
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://marketpulse.vercel.app"
+  ),
   openGraph: {
     title: "MarketPulse — Ai Palette Expansion & Monetization Strategy",
     description:
